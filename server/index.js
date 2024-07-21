@@ -6,6 +6,7 @@ import AuthRouter from "./routes/auth.route.js";
 import ListingRouter from "./routes/listing.route.js";
 import cookieParser from "cookie-parser";
 import path from "path";
+
 configDotenv();
 
 const app = express();
@@ -19,7 +20,8 @@ mongoose
     console.log("MongoDb is connected");
   })
   .catch((error) => {
-    console.log(error);
+    console.error("MongoDB connection error:", error);
+    process.exit(1); // Exit the process with an error code
   });
 
 app.listen(3000, () => {
