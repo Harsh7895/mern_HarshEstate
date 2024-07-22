@@ -13,7 +13,7 @@ app.use(cors());
 
 app.use(
   cors({
-    origin: "https://harsh-estate-mern.vercel.app",
+    origin: ["https://harsh-estate-mern.vercel.app", "http://localhost:5137"],
     methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "HEAD"],
     credentials: true,
   })
