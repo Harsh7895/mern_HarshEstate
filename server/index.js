@@ -5,19 +5,14 @@ import UserRouter from "./routes/user.route.js";
 import AuthRouter from "./routes/auth.route.js";
 import ListingRouter from "./routes/listing.route.js";
 import cookieParser from "cookie-parser";
-
 configDotenv();
 
 const app = express();
 
 app.use(express.json());
 app.use(cookieParser());
-
 mongoose
-  .connect(process.env.MONGO, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
+  .connect(process.env.MONGO)
   .then(() => {
     console.log("MongoDb is connected");
   })
