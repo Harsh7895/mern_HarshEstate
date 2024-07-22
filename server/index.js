@@ -19,7 +19,7 @@ app.use(
   })
 );
 app.use(cookieParser());
-app.use(express.urlencoded({ extended: true }));
+// app.use(express.urlencoded({ extended: true }));
 
 app.use((req, res, next) => {
   res.setHeader(
