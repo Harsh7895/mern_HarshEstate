@@ -11,8 +11,15 @@ configDotenv();
 const app = express();
 app.use(cors());
 
-app.use(express.json());
+app.use(
+  cors({
+    origin: "https://harsh-estate-mern.vercel.app",
+    methods: "GET , POST , PUT , PATCH , DELETE , HEAD",
+    credentials: true,
+  })
+);
 app.use(cookieParser());
+app.use(express.urlencoded({ extended: true }));
 
 app.use((req, res, next) => {
   res.setHeader(
