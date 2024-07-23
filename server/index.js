@@ -14,7 +14,7 @@ const app = express();
 // CORS configuration
 app.use(
   cors({
-    origin: ["https://harsh-estate-mern.vercel.app", "http://localhost:513"],
+    origin: "http://localhost:513",
     methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "HEAD"],
     credentials: true,
   })
