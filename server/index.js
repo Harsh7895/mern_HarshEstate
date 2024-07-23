@@ -1,37 +1,28 @@
 import express from "express";
 import mongoose from "mongoose";
-import { config as configDotenv } from "dotenv";
+import { configDotenv } from "dotenv";
 import UserRouter from "./routes/user.route.js";
 import AuthRouter from "./routes/auth.route.js";
 import ListingRouter from "./routes/listing.route.js";
 import cookieParser from "cookie-parser";
 import cors from "cors";
-
 configDotenv();
 
 const app = express();
+app.use(cors());
 
-// CORS configuration
 app.use(
   cors({
-    origin: "http://localhost:513",
+    origin: "https://harsh-estate-mern.vercel.app",
     methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "HEAD"],
     credentials: true,
   })
 );
-
 app.use(cookieParser());
+// app.use(express.urlencoded({ extended: true }));
 
-// Body parser middleware
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-
-// Connect to MongoDB
 mongoose
-  .connect(process.env.MONGO, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
+  .connect(process.env.MONGO)
   .then(() => {
     console.log("MongoDb is connected");
   })
@@ -40,12 +31,14 @@ mongoose
     process.exit(1); // Exit the process with an error code
   });
 
-// Routes
+app.listen(3000, () => {
+  console.log("Server is running :-)");
+});
+
 app.use("/api/user", UserRouter);
 app.use("/api/auth", AuthRouter);
 app.use("/api/listing", ListingRouter);
 
-// Error handling middleware
 app.use((err, req, res, next) => {
   const statusCode = err.statusCode || 500;
   const message = err.message || "Internal Server Error";
@@ -54,10 +47,4 @@ app.use((err, req, res, next) => {
     statusCode,
     message,
   });
-});
-
-const PORT = process.env.PORT || 3000;
-
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
 });
