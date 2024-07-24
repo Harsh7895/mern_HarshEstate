@@ -20,7 +20,6 @@ app.use(express.urlencoded({ extended: true }));
 //   })
 // );
 app.use(cookieParser());
-// app.use(express.urlencoded({ extended: true }));
 
 mongoose
   .connect(process.env.MONGO)
