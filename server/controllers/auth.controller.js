@@ -56,6 +56,7 @@ export const google = async (req, res, next) => {
           httpOnly: true,
           secure: process.env.IS_PRODUCTION === "true", // Ensure secure cookie in production
           maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days expiration
+          sameSite: "None",
         })
         .status(200)
         .json(rest);
@@ -82,7 +83,8 @@ export const google = async (req, res, next) => {
         .cookie("access_token", token, {
           httpOnly: true,
           secure: process.env.IS_PRODUCTION === "true", // Ensure secure cookie in production
-          maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days expiration
+          maxAge: 30 * 24 * 60 * 60 * 1000,
+          sameSite: "None", // 30 days expiration
         })
         .status(200)
         .json(rest);
