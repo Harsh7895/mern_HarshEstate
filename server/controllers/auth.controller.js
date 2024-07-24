@@ -33,7 +33,7 @@ export const signin = async (req, res, next) => {
     res
       .cookie("access_token", token, {
         httpOnly: true,
-        secure: process.env.IS_PRODUCTION === "true", // Ensure secure cookie in production
+        secure: true, // Ensure secure cookie in production
         maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days expiration
       })
       .status(201)
