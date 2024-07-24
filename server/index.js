@@ -5,19 +5,20 @@ import UserRouter from "./routes/user.route.js";
 import AuthRouter from "./routes/auth.route.js";
 import ListingRouter from "./routes/listing.route.js";
 import cookieParser from "cookie-parser";
-import cors from "cors";
+// import cors from "cors";
 configDotenv();
 
 const app = express();
-app.use(cors());
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
-app.use(
-  cors({
-    origin: "https://harsh-estate-mern.vercel.app",
-    methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "HEAD"],
-    credentials: true,
-  })
-);
+// app.use(
+//   cors({
+//     origin: "https://harsh-estate-mern.vercel.app",
+//     methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "HEAD"],
+//     credentials: true,
+//   })
+// );
 app.use(cookieParser());
 // app.use(express.urlencoded({ extended: true }));
 
@@ -28,7 +29,6 @@ mongoose
   })
   .catch((error) => {
     console.error("MongoDB connection error:", error);
-    process.exit(1); // Exit the process with an error code
   });
 
 app.listen(3000, () => {
